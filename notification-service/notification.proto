@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "./pb";
+
+service NotificationService {
+  rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
+}
+
+message SendNotificationRequest {
+  string message = 1;
+  string channel = 2;
+  string email = 3;
+}
+
+message SendNotificationResponse {
+  bool success = 1;
+  string message = 2;
+}

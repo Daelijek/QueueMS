@@ -1,0 +1,1 @@
+DELETE TABLE IF NOT EXISTS queues;

@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package queue;
+
+option go_package = "./pb";
+
+service QueueManagementService {
+  rpc CreateQueue(CreateQueueRequest) returns (CreateQueueResponse);
+  rpc UpdateQueue(UpdateQueueRequest) returns (UpdateQueueResponse);
+  rpc DeleteQueue(DeleteQueueRequest) returns (DeleteQueueResponse);
+  rpc GetQueueStatus(GetQueueStatusRequest) returns (GetQueueStatusResponse);
+}
+
+message CreateQueueRequest {
+  string name = 1;
+}
+
+message CreateQueueResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateQueueRequest {
+  int32 id = 1;
+  string name = 2;
+}
+
+message UpdateQueueResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DeleteQueueRequest {
+  int32 id = 1;
+}
+
+message DeleteQueueResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetQueueStatusRequest {
+  int32 id = 1;
+  string client_name_filter = 2; // Filter by client name
+  int32 limit = 3;               // Number of results per page
+  int32 offset = 4;              // Offset for pagination
+  string sort_by = 5;            // Field to sort by (e.g., "name")
+  string sort_order = 6;         // Sort order ("asc" or "desc")
+}
+
+
+message GetQueueStatusResponse {
+  int32 id = 1;
+  string name = 2;
+  repeated string clients = 3;
+  string message = 4;
+}
+
+message Client {
+  int32 id = 1;
+  string name = 2;
+}
+
+
+

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package client;
+
+option go_package = "./pb";
+
+service ClientService {
+  rpc RegisterClient(RegisterClientRequest) returns (RegisterClientResponse);
+  rpc GetClientStatus(GetClientStatusRequest) returns (GetClientStatusResponse);
+}
+
+message RegisterClientRequest {
+  int32 queue_id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message RegisterClientResponse {
+  bool success = 1;
+  string message = 2;
+  int32 client_id = 3;
+}
+
+message GetClientStatusRequest {
+  int32 client_id = 1;
+}
+
+message Client {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message GetClientStatusResponse {
+  Client client = 1;
+  int32 place_in_queue = 2;
+  int32 clients_before = 3;
+}
